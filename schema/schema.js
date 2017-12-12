@@ -1,6 +1,6 @@
 const graphql = require('graphql')
 const axios = require('axios')
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList } = graphql
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull } = graphql
 
 const CompanyType =  new GraphQLObjectType({
   name: 'Company',
@@ -67,8 +67,8 @@ const mutatation = new GraphQLObjectType({
       addUser: {
         type: UserType,
         args: {
-          firstName: { type: GraphQLString },
-          age: { type: GraphQLInt },
+          firstName: { type: new GraphQLNonNull(GraphQLString) },
+          age: { type: new GraphQLNonNull(GraphQLInt) },
           companyId: { type: GraphQLString }
         },
         resolve(){
